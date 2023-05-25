@@ -29,7 +29,7 @@
   const body = ref('');
   const post_id = ref(0);
   const isEditing = ref(false);
-  const API_URL = "http://localhost:3001/posts";
+  const API_URL = "http://localhost:3000/posts";
 
   onMounted(async() => {
     const res = await fetch(API_URL)

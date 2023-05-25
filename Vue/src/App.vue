@@ -1,11 +1,12 @@
 <template>
   <div>
-    <Posts />
+    <Managements />
   </div>
 </template>
 
 <script setup>
-import Posts from './components/Post.vue'
+//import Posts from './components/Post.vue'
+  import Managements from './components/Management.vue'
 </script>
 
 
