@@ -64,8 +64,13 @@
   const time = ref('');
   const description = ref('');
   const record_id = ref(0);
-  const isEditing = false;
+  const isEditing = ref(false);
   const API_URL = "http://localhost:3000/managements";
+
+  onMounted(async() => {
+    const res = await fetch(API_URL)
+    managements.value = await res.json()
+  })
 
   const createRecord = async() => {
     const res = await fetch(API_URL, {
@@ -88,9 +93,64 @@
     description.value = ''
     record_id.value = 0;
 
-    console.log(data)
   }
 
+  const updateRecord = async() => {
+    const res = await fetch(`${API_URL}/${record_id.value}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        date: date.value,
+        time: time.value,
+        description: description.value,
+        id: record_id.value
+      })
+    })
+
+    const data = await res.json()
+
+    const index = managements.value.findIndex(item => item.id === data.id)
+    managements.value[index] = data
+
+    date.value = ''
+    time.value = ''
+    description.value = ''
+    record_id.value = 0
+    isEditing.value = false
+  }
+
+  const cancelRecord = () => {
+    date.value = ''
+    time.value = ''
+    description.value = ''
+    record_id.value = ''
+    isEditing.value = false
+  }
+
+  const editRecord = async(id) => {
+    const item = managements.value.find(item => item.id === id)
+    console.log(item)
+
+    date.value = item.date
+    time.value = item.time
+    description.value = item.description
+    record_id.value = item.id
+    isEditing.value = true
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  const deleteRecord = async(id) => {
+    await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE'
+    })
+    managements.value = managements.value.filter(item => item.id !== id)
+  }
 </script>
 
 <style scoped>
