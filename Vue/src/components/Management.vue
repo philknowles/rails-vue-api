@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <h1>Micro Manager</h1>
-    <input type="date" 
+  <div class="container-fluid">
+    <b-navbar toggleable="sm" type="light" variant="light">
+      <b-navbar-brand href="#">Micro Manager</b-navbar-brand>
+    </b-navbar>
+    <div style="display:flex;">
+      <input type="date" 
       v-model="date"
       placeholder="date"
       class="title-input">
@@ -16,7 +19,7 @@
       placeholder="description"
       class="title-input">
 
-      <!-- <input type="text" 
+      <input type="text" 
       v-model="owner"
       placeholder="owner"
       class="title-input">
@@ -39,11 +42,13 @@
       <textarea  
       v-model="notes"
       placeholder="notes"
-      class="title-input"></textarea> -->
+      class="title-input"></textarea>
 
       <button v-if="isEditing" @click="updateRecord">Update</button>
       <button v-if="isEditing" @click="cancelRecord">Cancel</button>
       <button v-else @click="createRecord">Create</button>
+    </div>
+
 
       <div v-for="item in managements" :key="item.id">
         <h5>{{item.id}} {{ item.title }}</h5>
@@ -154,10 +159,14 @@
 </script>
 
 <style scoped>
+.container-fluid {
+  width:100%;
+}
 .title-input {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    max-height:35px;
+    padding: 3px 20px;
+    margin: 8px 2px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     background-color: #f8f8f8;
