@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <b-navbar toggleable="sm" type="light" variant="light">
+    <b-navbar type="dark" variant="dark" style="background-color:#000;color:#fff;">
       <b-navbar-brand href="#">Micro Manager</b-navbar-brand>
     </b-navbar>
     <div style="display:flex;">
@@ -12,7 +12,7 @@
       <input type="text" 
       v-model="time"
       placeholder="time"
-      class="title-input">
+      class="title-input" style="width:85px;">
 
       <input type="text" 
       v-model="description"
@@ -50,13 +50,68 @@
     </div>
 
 
-      <div v-for="item in managements" :key="item.id">
-        <h5>{{item.id}} {{ item.title }}</h5>
-        <p>{{ item.date }} {{ item.time }} {{ item.description }}{{ item.owner }}{{ item.category }}{{ item.due_date }}{{ item.status }}</p>
-        <p>{{ item.notes }}</p>
-        <button @click="editRecord(item.id)">Edit</button>
-        <button @click="deleteRecord(item.id)">Delete</button>
-      </div>
+    <table class="table table-striped" style="width:100%;">
+      <thead>
+        <tr>
+          <td>
+              Date
+          </td>
+          <td>
+            Time Spent<small><i>(hh.mm)</i></small>
+          </td>
+          <td>
+            Description
+          </td>
+          <td>
+            Owner
+          </td>
+          <td>
+            Category
+          </td>
+          <td>
+            Due Date
+          </td>
+          <td>
+            Status
+          </td>
+          <td>
+            Notes
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+          <tr v-for="item in managements" :key="item.id">
+            <td>
+              {{ item.date }}
+            </td>
+            <td>
+              {{ item.time }}
+            </td>
+            <td>
+              {{ item.description }}
+            </td>
+            <td>
+              {{ item.owner }}
+            </td>
+            <td>
+              {{ item.category }}
+            </td>
+            <td>
+              {{ item.due_date }}
+            </td>
+            <td>
+              {{ item.status }}
+            </td>
+            <td>
+              {{ item.notes }}
+            </td>
+            <td style="text-align:right;">
+              <button class="btn-icons" @click="editRecord(item.id)"><font-awesome-icon icon="fa-solid fa-pencil" /></button>
+              <button class="btn-icons" @click="deleteRecord(item.id)"><font-awesome-icon icon="fa-solid fa-trash-can" /></button>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 </div>
 </template>
@@ -68,6 +123,11 @@
   const date = ref('');
   const time = ref('');
   const description = ref('');
+  const owner = ref('');
+  const category = ref('');
+  const due_date = ref('');
+  const status = ref('');
+  const notes = ref('');
   const record_id = ref(0);
   const isEditing = ref(false);
   const API_URL = "http://localhost:3000/managements";
@@ -86,7 +146,12 @@
       body: JSON.stringify({
         date: date.value,
         time: time.value,
-        description: description.value
+        description: description.value,
+        owner: owner.value,
+        category: category.value,
+        due_date: due_date.value,
+        status: status.value,
+        notes: notes.value
       })
     })
 
@@ -96,6 +161,11 @@
     date.value = ''
     time.value = ''
     description.value = ''
+    owner.value = ''
+    category.value = ''
+    due_date.value = ''
+    status.value = ''
+    notes.value = ''
     record_id.value = 0;
 
   }
@@ -110,6 +180,11 @@
         date: date.value,
         time: time.value,
         description: description.value,
+        owner: owner.value,
+        category: category.value,
+        due_date: due_date.value,
+        status: status.value,
+        notes: notes.value,
         id: record_id.value
       })
     })
@@ -122,6 +197,11 @@
     date.value = ''
     time.value = ''
     description.value = ''
+    owner.value = ''
+    category.value = ''
+    due_date.value = ''
+    status.value = ''
+    notes.value = ''
     record_id.value = 0
     isEditing.value = false
   }
@@ -130,6 +210,11 @@
     date.value = ''
     time.value = ''
     description.value = ''
+    owner.value = ''
+    category.value = ''
+    due_date.value = ''
+    status.value = ''
+    notes.value = ''
     record_id.value = ''
     isEditing.value = false
   }
@@ -141,6 +226,11 @@
     date.value = item.date
     time.value = item.time
     description.value = item.description
+    owner.value = item.owner
+    category.value = item.category
+    due_date.value = item.due_date
+    status.value = item.status
+    notes.value = item.notes
     record_id.value = item.id
     isEditing.value = true
 
@@ -185,5 +275,11 @@
     color: #111;
     border-radius: 4px;
     resize: vertical;
+}
+
+button.btn-icons {
+  padding:5px;
+  margin:0 5px;
+  background:none;
 }
 </style>
