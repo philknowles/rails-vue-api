@@ -15,8 +15,4 @@ library.add([faUserSecret, faTrashCan, faPencil])
 // library.add(faTrashCan)
 // library.add(faPencil)
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

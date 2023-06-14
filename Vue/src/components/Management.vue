@@ -1,56 +1,63 @@
 <template>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <b-navbar type="dark" variant="dark" style="background-color:#000;color:#fff;">
-      <b-navbar-brand href="#">Micro Manager</b-navbar-brand>
-    </b-navbar>
-    <div style="display:flex;">
-      <input type="date" 
-      v-model="date"
-      placeholder="date"
-      class="title-input">
+    <a class="navbar-brand" href="#">MicroManager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="navbar-nav me-auto mb-2 mb-lg-0">
+          <input type="date" 
+          v-model="date"
+          placeholder="date"
+          class="title-input">
 
-      <input type="text" 
-      v-model="time"
-      placeholder="time"
-      class="title-input" style="width:85px;">
+          <input type="text" 
+          v-model="time"
+          placeholder="time"
+          class="title-input" style="width:85px;">
 
-      <input type="text" 
-      v-model="description"
-      placeholder="description"
-      class="title-input">
+          <input type="text" 
+          v-model="description"
+          placeholder="description"
+          class="title-input">
 
-      <input type="text" 
-      v-model="owner"
-      placeholder="owner"
-      class="title-input">
+          <input type="text" 
+          v-model="owner"
+          placeholder="owner"
+          class="title-input">
 
-      <input type="text" 
-      v-model="category"
-      placeholder="category"
-      class="title-input">
+          <input type="text" 
+          v-model="category"
+          placeholder="category"
+          class="title-input">
 
-      <input type="date" 
-      v-model="due_date"
-      placeholder="due date"
-      class="title-input">
+          <input type="date" 
+          v-model="due_date"
+          placeholder="due date"
+          class="title-input">
 
-      <input type="text" 
-      v-model="status"
-      placeholder="status"
-      class="title-input">
+          <input type="text" 
+          v-model="status"
+          placeholder="status"
+          class="title-input">
 
-      <textarea  
-      v-model="notes"
-      placeholder="notes"
-      class="title-input"></textarea>
+          <textarea  
+          v-model="notes"
+          placeholder="notes"
+          class="title-input"></textarea>
 
-      <button v-if="isEditing" @click="updateRecord">Update</button>
-      <button v-if="isEditing" @click="cancelRecord">Cancel</button>
-      <button v-else @click="createRecord">Create</button>
+          <button v-if="isEditing" @click="updateRecord">Update</button>
+          <button v-if="isEditing" @click="cancelRecord">Cancel</button>
+          <button v-else @click="createRecord">Create</button>
+      </div>
     </div>
+  </div>
+</nav>
 
 
-    <table class="table table-striped" style="width:100%;">
+
+    <!-- <table class="table table-striped" style="width:100%;">
       <thead>
         <tr>
           <td>
@@ -111,9 +118,8 @@
             </td>
           </tr>
       </tbody>
-    </table>
+    </table> -->
 
-</div>
 </template>
 
 <script setup>
