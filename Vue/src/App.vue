@@ -1,7 +1,7 @@
 <template>
   <div>
     <Managements />
-    <AgGrid />
+    <!-- <AgGrid /> -->
   </div>
 </template>
 

@@ -1,125 +1,154 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">MicroManager</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="navbar-nav me-auto mb-2 mb-lg-0">
-          <input type="date" 
-          v-model="date"
-          placeholder="date"
-          class="title-input">
+          <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Micro Manager</div>
+                <div class="list-group list-group-flush p-2">
+                  <input type="date" 
+                  v-model="date"
+                  placeholder="date"
+                  class="title-input">
 
-          <input type="text" 
-          v-model="time"
-          placeholder="time"
-          class="title-input" style="width:85px;">
+                  <input type="text" 
+                  v-model="time"
+                  placeholder="time"
+                  class="title-input">
 
-          <input type="text" 
-          v-model="description"
-          placeholder="description"
-          class="title-input">
+                  <input type="text" 
+                  v-model="description"
+                  placeholder="description"
+                  class="title-input">
 
-          <input type="text" 
-          v-model="owner"
-          placeholder="owner"
-          class="title-input">
+                  <input type="text" 
+                  v-model="owner"
+                  placeholder="owner"
+                  class="title-input">
 
-          <input type="text" 
-          v-model="category"
-          placeholder="category"
-          class="title-input">
+                  <input type="text" 
+                  v-model="category"
+                  placeholder="category"
+                  class="title-input">
 
-          <input type="date" 
-          v-model="due_date"
-          placeholder="due date"
-          class="title-input">
+                  <input type="date" 
+                  v-model="due_date"
+                  placeholder="due date"
+                  class="title-input">
 
-          <input type="text" 
-          v-model="status"
-          placeholder="status"
-          class="title-input">
+                  <input type="text" 
+                  v-model="status"
+                  placeholder="status"
+                  class="title-input">
 
-          <textarea  
-          v-model="notes"
-          placeholder="notes"
-          class="title-input"></textarea>
+                  <textarea  
+                  v-model="notes"
+                  placeholder="notes"
+                  class="title-input"></textarea>
 
-          <button v-if="isEditing" @click="updateRecord">Update</button>
-          <button v-if="isEditing" @click="cancelRecord">Cancel</button>
-          <button v-else @click="createRecord">Create</button>
-      </div>
-    </div>
-  </div>
-</nav>
-
-
-
-    <!-- <table class="table table-striped" style="width:100%;">
-      <thead>
-        <tr>
-          <td>
-              Date
-          </td>
-          <td>
-            Time Spent<small><i>(hh.mm)</i></small>
-          </td>
-          <td>
-            Description
-          </td>
-          <td>
-            Owner
-          </td>
-          <td>
-            Category
-          </td>
-          <td>
-            Due Date
-          </td>
-          <td>
-            Status
-          </td>
-          <td>
-            Notes
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-          <tr v-for="item in managements" :key="item.id">
-            <td>
-              {{ item.date }}
-            </td>
-            <td>
-              {{ item.time }}
-            </td>
-            <td>
-              {{ item.description }}
-            </td>
-            <td>
-              {{ item.owner }}
-            </td>
-            <td>
-              {{ item.category }}
-            </td>
-            <td>
-              {{ item.due_date }}
-            </td>
-            <td>
-              {{ item.status }}
-            </td>
-            <td>
-              {{ item.notes }}
-            </td>
-            <td style="text-align:right;">
-              <button class="btn-icons" @click="editRecord(item.id)"><font-awesome-icon icon="fa-solid fa-pencil" /></button>
-              <button class="btn-icons" @click="deleteRecord(item.id)"><font-awesome-icon icon="fa-solid fa-trash-can" /></button>
-            </td>
-          </tr>
-      </tbody>
-    </table> -->
-
+                <button v-if="isEditing" @click="updateRecord">Update</button>
+                <button v-if="isEditing" @click="cancelRecord">Cancel</button>
+                <button v-else @click="createRecord">Create</button>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#!">Action</a>
+                                        <a class="dropdown-item" href="#!">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#!">Something else here</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Simple Sidebar</h1>
+                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                    <p>
+                        Make sure to keep all page content within the
+                        <code>#page-content-wrapper</code>
+                        . The top navbar is optional, and just for demonstration. Just create an element with the
+                        <code>#sidebarToggle</code>
+                        ID which will toggle the menu when clicked.
+                    </p>
+                    <table class="table table-striped" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <td>
+                              Date
+                          </td>
+                          <td>
+                            Time Spent<small><i>(hh.mm)</i></small>
+                          </td>
+                          <td>
+                            Description
+                          </td>
+                          <td>
+                            Owner
+                          </td>
+                          <td>
+                            Category
+                          </td>
+                          <td>
+                            Due Date
+                          </td>
+                          <td>
+                            Status
+                          </td>
+                          <td>
+                            Notes
+                          </td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr v-for="item in managements" :key="item.id">
+                            <td>
+                              {{ item.date }}
+                            </td>
+                            <td>
+                              {{ item.time }}
+                            </td>
+                            <td>
+                              {{ item.description }}
+                            </td>
+                            <td>
+                              {{ item.owner }}
+                            </td>
+                            <td>
+                              {{ item.category }}
+                            </td>
+                            <td>
+                              {{ item.due_date }}
+                            </td>
+                            <td>
+                              {{ item.status }}
+                            </td>
+                            <td>
+                              {{ item.notes }}
+                            </td>
+                            <td style="text-align:right;">
+                              <button class="btn-icons" @click="editRecord(item.id)"><font-awesome-icon icon="fa-solid fa-pencil" /></button>
+                              <button class="btn-icons" @click="deleteRecord(item.id)"><font-awesome-icon icon="fa-solid fa-trash-can" /></button>
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
 </template>
 
 <script setup>
