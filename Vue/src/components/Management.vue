@@ -54,36 +54,24 @@
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#!">Action</a>
-                                        <a class="dropdown-item" href="#!">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Simple Sidebar</h1>
-                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                    <h1 class="mt-4">Time Sheet</h1>
+                    <p>This timesheet helps keep track of all work done for a given day.  This is useful for project management, scrum, and productivity.  Add a task, bug, story, or anything else you need to track for a given day.</p>
                     <p>
-                        Make sure to keep all page content within the
-                        <code>#page-content-wrapper</code>
-                        . The top navbar is optional, and just for demonstration. Just create an element with the
-                        <code>#sidebarToggle</code>
-                        ID which will toggle the menu when clicked.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ornare diam. Ut malesuada ornare massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum eget maximus est, a pretium dolor. Sed consequat augue in nunc efficitur, vitae ultricies lorem mattis. Morbi vestibulum justo ac imperdiet ultricies. Cras varius, ipsum quis finibus dapibus, elit augue rutrum nunc, vitae bibendum neque sem non lacus. Vestibulum tortor turpis, pretium non semper in, aliquam quis augue.
                     </p>
+
+                    {{ totalTimeSpent }}
                     <table class="table table-striped" style="width:100%;">
                       <thead>
                         <tr>
@@ -114,7 +102,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <tr v-for="item in managements" :key="item.id">
+                          <tr v-for="(item) in (managements)" :key="item.id">
                             <td>
                               {{ item.date }}
                             </td>
@@ -205,6 +193,7 @@
 
   }
 
+
   const updateRecord = async() => {
     const res = await fetch(`${API_URL}/${record_id.value}`, {
       method: "PUT",
@@ -256,7 +245,6 @@
 
   const editRecord = async(id) => {
     const item = managements.value.find(item => item.id === id)
-    console.log(item)
 
     date.value = item.date
     time.value = item.time
@@ -281,6 +269,12 @@
     })
     managements.value = managements.value.filter(item => item.id !== id)
   }
+
+  function computed() {
+   return managements.value.filter(item => item.time) 
+  }
+  const totalTimeSpent = computed()
+  
 </script>
 
 <style scoped>
